@@ -54,3 +54,8 @@
 ;;
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are implemented.
+(use-package! lsp-haskell)
+(require 'lsp)
+(require 'lsp-haskell)
+(add-hook 'haskell-mode-hook #'lsp)
+(setq lsp-haskell-process-path-hie "hie-wrapper")
