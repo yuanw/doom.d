@@ -19,7 +19,7 @@
        ;;japanese
 
        :completion
-       company           ; the ultimate code completion backend
+       (company +childframe)           ; the ultimate code completion backend
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ivy               ; a search engine for love and life
@@ -77,7 +77,7 @@
        :checkers
        syntax              ; tasing you for every semicolon you forget
        spell             ; tasing you for misspelling mispelling
-       grammar           ; tasing grammar mistake every you make
+       ;;grammar           ; tasing grammar mistake every you make
 
        :tools
        ;;ansible
@@ -120,7 +120,9 @@
        ;;fsharp           ; ML stands for Microsoft's Language
        ;;fstar             ; (dependent) types and (monadic) effects and Z3
        ;;go                ; the hipster dialect
-       haskell  ; a language that's lazier than I am
+       (haskell
+        ;;+lsp
+        +ghcide)  ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ;
        ;;(java +meghanada) ; the poster child for carpal tunnel syndrome
@@ -142,6 +144,7 @@
         ;;+jupyter        ; ipython/jupyter support for babel
         ;;+pandoc          ; export-with-pandoc support
         ;;+pomodoro        ; be fruitful with the tomato technique
+        ;;+roam
         +present)        ; using org-mode for presentations
        ;;perl              ; write code no one else can comprehend
        ;;php               ; perl's insecure younger brother
