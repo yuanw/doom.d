@@ -59,3 +59,4 @@
 (require 'lsp)
 (require 'lsp-haskell)
 (add-hook 'haskell-mode-hook #'lsp)
+(setq lsp-haskell-process-path-hie "haskell-language-server-wrapper")
