@@ -19,12 +19,17 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "PragmataPro" :size 20))
-
+(setq doom-font (font-spec :family "PragmataPro" :size 24))
+;;(setq doom-font (font-spec :family "Iosevka Term Medium" :size 24))
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-dracula)
+;; doom-palenight is also nice
+(setq doom-theme 'doom-palenight)
+(after! doom-themes
+  (setq
+   doom-themes-enable-bold t
+   doom-themes-enable-italic t))
 
 (defun +org/opened-buffer-files ()
   "Return the list of files currently opened in Emacs."
