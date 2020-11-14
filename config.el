@@ -19,17 +19,30 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Essential PragmataPro" :size 20))
+(setq doom-font (font-spec :family "PragmataPro" :size 20))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-dracula)
 
+(defun +org/opened-buffer-files ()
+  "Return the list of files currently opened in Emacs."
+  (delq nil
+        (mapcar (lambda (x)
+                  (if (and (buffer-file-name x)
+                           (string-match "\\.org$"
+                                         (buffer-file-name x)))
+                      (buffer-file-name x)))
+                (buffer-list))))
+
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org-notes"
-      org-agenda-files (directory-files-recursively org-directory "\.org$"))
+(setq org-directory "~/org-notes/"
+      org-roam-dailies-directory (concat org-directory "dailies/")
+      org-roam-directory (concat org-directory "roam/")
+      org-default-notes-file (concat org-directory "journal/Dropbox/org/inbox.org")
+      org-refile-targets '((+org/opened-buffer-files :maxlevel . 9)))
 
 
 ;;; :tools direnv
@@ -55,10 +68,10 @@
 ;;
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are implemented.
-(use-package lsp-haskell
- :ensure t
- :config
- (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper")
- ;; Comment/uncomment this line to see interactions between lsp client/server.
- ;;(setq lsp-log-io t)
-)
+;; (use-package lsp-haskell
+;;  :ensure t
+;;  :config
+;;  (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper")
+;;  ;; Comment/uncomment this line to see interactions between lsp client/server.
+;;  ;;(setq lsp-log-io t)
+;;)
