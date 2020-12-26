@@ -36,7 +36,7 @@
   (delq nil
         (mapcar (lambda (x)
                   (if (and (buffer-file-name x)
-                           (string-match "\\.org$"
+                           (string-match "\\.org.gpg$"
                                          (buffer-file-name x)))
                       (buffer-file-name x)))
                 (buffer-list))))
@@ -46,6 +46,11 @@
 (setq org-directory "~/org-notes/"
       org-roam-dailies-directory (concat org-directory "dailies/")
       org-roam-directory (concat org-directory "roam/")
+      org-roam-encrypt-files t
+      org-agenda-file-regexp "\\`[^.].*\\.org.gpg\\'"
+      org-agenda-files (append (file-expand-wildcards (concat org-directory "*.org.gpg"))
+                               (file-expand-wildcards (concat org-directory "*.org"))
+                               )
       org-default-notes-file (concat org-directory "journal/Dropbox/org/inbox.org")
       org-refile-targets '((+org/opened-buffer-files :maxlevel . 9)))
 
