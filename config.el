@@ -51,7 +51,8 @@
       org-agenda-files (append (file-expand-wildcards (concat org-directory "*.org.gpg"))
                                (file-expand-wildcards (concat org-directory "*.org"))
                                )
-      org-default-notes-file (concat org-directory "journal/Dropbox/org/inbox.org")
+      org-default-notes-file (concat org-directory "Dropbox/project/inbox.org")
+      +org-capture-todo-file (concat org-directory "Dropbox/project/inbox.org")
       org-refile-targets '((+org/opened-buffer-files :maxlevel . 9)))
 
 
