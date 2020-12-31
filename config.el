@@ -53,7 +53,7 @@
                                (file-expand-wildcards (concat org-directory "*.org"))
                                (file-expand-wildcards (concat org-directory "projects/*.org"))
                                (file-expand-wildcards (concat org-directory "projects/*.org.gpg"))
-                               (file-expand-wildcards (concat org-directory "Dropbox/project/*.org.gpg"))
+                               (file-expand-wildcards (concat org-directory "Dropbox/project/*.org"))
                                )
       org-default-notes-file (concat org-directory "Dropbox/project/inbox.org")
       +org-capture-todo-file (concat org-directory "Dropbox/project/inbox.org")
