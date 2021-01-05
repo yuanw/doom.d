@@ -25,7 +25,8 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ;; doom-palenight is also nice
-(setq doom-theme 'doom-palenight)
+;(setq doom-theme 'doom-palenight)
+(setq doom-theme 'doom-vibrant)
 (after! doom-themes
   (setq
    doom-themes-enable-bold t
@@ -43,7 +44,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org-notes/"
+(setq org-directory "~/org/"
       org-roam-directory (concat org-directory "roam/")
       org-roam-encrypt-files t
       deft-extensions '("org" "gpg")
@@ -66,7 +67,15 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type nil)
 
+(after! org
+  (setq org-agenda-dim-blocked-tasks nil)
+  (setq org-agenda-inhibit-startup t)
+  (setq org-agenda-use-tag-inheritance nil)
+  (setq org-modules
+   (quote
+    (org-habit org-bibtex ))))
 
+(require 'org-habit)
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
