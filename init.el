@@ -38,9 +38,9 @@
        ;;neotree           ; a project drawer, like NERDTree for vim
        ophints           ; highlight the region an operation acts on
        (popup +defaults)   ; tame sudden yet inevitable temporary windows
-       (ligatures
-        +extra
-        +pragmata-pro)       ; replace bits of code with pretty symbols
+       ;;(ligatures
+       ;; +extra
+       ;; +pragmata-pro)       ; replace bits of code with pretty symbols
        ;;tabs              ; an tab bar for Emacs
        treemacs          ; a project drawer, like neotree but cooler
        unicode           ; extended unicode support for various languages
@@ -152,7 +152,6 @@
        ;;plantuml          ; diagrams for confusing people more
        purescript        ; javascript, but functional
        (python            ; beautiful is better than ugly
-        +pyenv
         +lsp)
         ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
