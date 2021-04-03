@@ -44,7 +44,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/Dropbox/org/"
+(setq org-directory "~/work/org/"
       org-roam-directory (concat org-directory "roam/")
       org-roam-encrypt-files t
       deft-extensions '("org" "gpg")
@@ -57,8 +57,8 @@
                                (file-expand-wildcards (concat org-directory "projects/*.org.gpg"))
                                (file-expand-wildcards (concat org-directory "Dropbox/project/*.org"))
                                )
-      org-default-notes-file (concat org-directory "Dropbox/project/inbox.org")
-      +org-capture-todo-file (concat org-directory "Dropbox/project/inbox.org")
+      org-default-notes-file (concat org-directory "inbox/inbox.org")
+      +org-capture-todo-file (concat org-directory "inbox/inbox.org")
       org-refile-targets '((+org/opened-buffer-files :maxlevel . 9)))
 
 
