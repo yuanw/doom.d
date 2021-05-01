@@ -44,7 +44,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/Dropbox/org/"
+(setq org-directory "~/work/org/"
       org-roam-directory (concat org-directory "roam/")
       org-roam-encrypt-files t
       deft-extensions '("org" "gpg")
