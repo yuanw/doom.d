@@ -109,55 +109,55 @@
                               "#+title: %<%Y-%m-%d>\n"))))
   (set-company-backend! 'org-mode '(company-capf)))
 
-(defun org-roam-v1-to-v2 ()
-  ;; Create file level ID
-  (org-with-point-at 1
-    (org-id-get-create))
-  ;; Replace roam_key into properties drawer roam_ref
-  (when-let* ((refs (cdar (org-collect-keywords '("roam_key")))))
-    (org-set-property "ROAM_REFS" (combine-and-quote-strings refs))
-    (let ((case-fold-search t))
-      (org-with-point-at 1
-        (while (re-search-forward "^#\\+roam_key:" (point-max) t)
-          (beginning-of-line)
-          (kill-line)))))
+;; (defun org-roam-v1-to-v2 ()
+;;   ;; Create file level ID
+;;   (org-with-point-at 1
+;;     (org-id-get-create))
+;;   ;; Replace roam_key into properties drawer roam_ref
+;;   (when-let* ((refs (cdar (org-collect-keywords '("roam_key")))))
+;;     (org-set-property "ROAM_REFS" (combine-and-quote-strings refs))
+;;     (let ((case-fold-search t))
+;;       (org-with-point-at 1
+;;         (while (re-search-forward "^#\\+roam_key:" (point-max) t)
+;;           (beginning-of-line)
+;;           (kill-line)))))
 
-  ;; Replace roam_alias into properties drawer roam_aliases
-  (when-let* ((aliases (cdar (org-collect-keywords '("roam_alias")))))
-    (org-set-property "ROAM_ALIASES" (combine-and-quote-strings aliases))
-    (let ((case-fold-search t))
-      (org-with-point-at 1
-        (while (re-search-forward "^#\\+roam_alias:" (point-max) t)
-          (beginning-of-line)
-          (kill-line)))))
-  (save-buffer))
+;;   ;; Replace roam_alias into properties drawer roam_aliases
+;;   (when-let* ((aliases (cdar (org-collect-keywords '("roam_alias")))))
+;;     (org-set-property "ROAM_ALIASES" (combine-and-quote-strings aliases))
+;;     (let ((case-fold-search t))
+;;       (org-with-point-at 1
+;;         (while (re-search-forward "^#\\+roam_alias:" (point-max) t)
+;;           (beginning-of-line)
+;;           (kill-line)))))
+;;   (save-buffer))
 
-;; Step 1: Convert all v1 files to v2 files
-(dolist (f (org-roam--list-all-files))
-  (with-current-buffer (find-file-noselect f)
-    (org-roam-v1-to-v2)))
+;; ;; Step 1: Convert all v1 files to v2 files
+;; (dolist (f (org-roam--list-all-files))
+;;   (with-current-buffer (find-file-noselect f)
+;;     (org-roam-v1-to-v2)))
 
-;; Step 2: Build cache
-(org-roam-db-sync)
+;; ;; Step 2: Build cache
+;; (org-roam-db-sync)
 
-;; Step 3: Replace all file links with id links where possible
-(defun org-roam-replace-file-links-with-id ()
-  (org-with-point-at 1
-    (while (re-search-forward org-link-bracket-re nil t)
-      (let* ((mdata (match-data))
-             (path (match-string 1))
-             (desc (match-string 2)))
-        (when (string-prefix-p "file:" path)
-          (setq path (expand-file-name (substring path 5)))
-          (when-let ((node-id (caar (org-roam-db-query [:select [id] :from nodes
-                                                        :where (= file $s1)
-                                                        :and (= level 0)] path))))
-            (set-match-data mdata)
-            (replace-match (org-link-make-string (concat "id:" node-id) desc))))))))
+;; ;; Step 3: Replace all file links with id links where possible
+;; (defun org-roam-replace-file-links-with-id ()
+;;   (org-with-point-at 1
+;;     (while (re-search-forward org-link-bracket-re nil t)
+;;       (let* ((mdata (match-data))
+;;              (path (match-string 1))
+;;              (desc (match-string 2)))
+;;         (when (string-prefix-p "file:" path)
+;;           (setq path (expand-file-name (substring path 5)))
+;;           (when-let ((node-id (caar (org-roam-db-query [:select [id] :from nodes
+;;                                                         :where (= file $s1)
+;;                                                         :and (= level 0)] path))))
+;;             (set-match-data mdata)
+;;             (replace-match (org-link-make-string (concat "id:" node-id) desc))))))))
 
-(dolist (f (org-roam--list-all-files))
-  (with-current-buffer (find-file-noselect f)
-    (org-roam-replace-file-links-with-id)))
+;; (dolist (f (org-roam--list-all-files))
+;;   (with-current-buffer (find-file-noselect f)
+;;     (org-roam-replace-file-links-with-id)))
 ;;; :tools direnv
 ;;(setq direnv-always-show-summary nil)
 ;; This determines the style of line numbers in effect. If set to `nil', line
